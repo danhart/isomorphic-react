@@ -18,7 +18,9 @@ app.set('view engine', 'jade');
 
 if (app.get('env') === 'development') {
   browserify.settings({
-    transform: ['babelify']
+    transform:  ['babelify'],
+    extensions: ['.js', '.jsx'],
+    grep:       /\.(?:js|jsx)$/
   });
 
   app.get('/scripts/app.js', browserify(__dirname + '/client/js/app.js'));
