@@ -5,10 +5,11 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
     "clean": "rm -rf dist && rm -f package.zip",
     "package": "cd dist && zip -rq ../package.zip .",
-    "prebuild": "npm install && npm run clean && cp -r src dist && cp -r node_modules dist/",
-    "build": "babel src/ --out-dir dist",
+    "prebuild": "npm install && npm run clean && cp -r src dist && cp -r node_modules dist/ && mkdir -p dist/public/scripts",
+    "build": "babel src/ --out-dir dist && browserify dist/client/js/app.js | uglifyjs > dist/public/scripts/app.js",
     "postbuild": "npm run package"
   },
   "author": "",
