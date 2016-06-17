@@ -1,3 +1,4 @@
+process.env.NODE_ENV = 'production';
 var server = require('./server');
 var http = require('http');
 

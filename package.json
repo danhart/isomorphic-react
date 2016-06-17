@@ -8,7 +8,7 @@
     "start": "babel-node src/server.js",
     "clean": "rm -rf dist && rm -f package.zip",
     "package": "cd dist && zip -rq ../package.zip .",
-    "bundle": "NODE_ENV=production browserify --extension=.jsx -t babelify -g envify -g uglifyify src/client/js/app.js -o dist/public/scripts/app.js",
+    "bundle": "NODE_ENV=production browserify --extension=.jsx -t babelify -g envify -g [ uglifyify --no-sourcemap ] src/client/js/app.js -o dist/public/scripts/app.js",
     "prebuild": "npm install && npm run clean && cp -r src dist && cp -r node_modules dist/ && mkdir -p dist/public/scripts",
     "build": "NODE_ENV=production babel src/ --out-dir dist && npm run bundle",
     "postbuild": "npm run package"
