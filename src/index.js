@@ -4,8 +4,6 @@ var http = require('http');
 var request = require('request');
 
 exports.handler = function(event, context) {
-  console.log(event);
-  console.log(context);
   var options = {
     host: server.address().address,
     port: server.address().port,
@@ -13,10 +11,11 @@ exports.handler = function(event, context) {
   };
 
   request(`http://localhost:${options.port}${options.path}`, function (error, response, body) {
+    console.log(response);
     if (!error && response.statusCode == 200) {
       context.succeed({
         "statusCode": response.statusCode,
-        "headers":    response.headers
+        "headers":    response.headers,
         "body":       body
       });
     } else {
