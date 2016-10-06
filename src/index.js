@@ -4,21 +4,21 @@ var http = require('http');
 var request = require('request');
 
 exports.handler = function(event, context) {
-  var fullPath = Object.keys(event).reduce(function(path, part) {
-    if (!event[part]) return path;
-
-    return path + "/" + event[part];
-  }, "");
-
+  console.log(event);
+  console.log(context);
   var options = {
     host: server.address().address,
     port: server.address().port,
-    path: fullPath
+    path: event.path
   };
 
   request(`http://localhost:${options.port}${options.path}`, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      context.succeed(body);
+      context.succeed({
+        "statusCode": response.statusCode,
+        "headers":    response.headers
+        "body":       body
+      });
     } else {
       context.fail(error);
     }
